@@ -66,8 +66,8 @@ public class RemoteChannelThroughputBenchmark extends RemoteBenchmarkBase {
 
         DataStreamSource<Long> source = env.addSource(new LongSource(RECORDS_PER_SUBTASK));
         source
-            .slotSharingGroup("source").rebalance()
-            .map((MapFunction<Long, Long>) value -> value).slotSharingGroup("map").rebalance()
+            .slotSharingGroup("source").loadRebalance()
+            .map((MapFunction<Long, Long>) value -> value).slotSharingGroup("map").loadRebalance()
             .addSink(new DiscardingSink<>()).slotSharingGroup("sink");
 
         miniCluster.executeJobBlocking(StreamingJobGraphGenerator.createJobGraph(env.getStreamGraph()));

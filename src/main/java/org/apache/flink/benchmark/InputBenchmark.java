@@ -76,7 +76,7 @@ public class InputBenchmark extends BenchmarkBase {
 		DataStreamSource<Long> source = sourceType.source(env, RECORDS_PER_INVOCATION);
 		source
 				.map(new MultiplyByTwo())
-				.rebalance()
+				.loadRebalance()
 				.map((Long in) -> in)
 				.addSink(new DiscardingSink<>());
 

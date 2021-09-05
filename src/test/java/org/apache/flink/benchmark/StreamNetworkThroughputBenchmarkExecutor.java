@@ -19,6 +19,7 @@
 package org.apache.flink.benchmark;
 
 import org.apache.flink.configuration.Configuration;
+import org.apache.flink.runtime.io.network.api.writer.ChannelSelector;
 import org.apache.flink.runtime.net.SSLUtilsTest;
 import org.apache.flink.streaming.runtime.io.benchmark.StreamNetworkThroughputBenchmark;
 
@@ -85,7 +86,7 @@ public class StreamNetworkThroughputBenchmarkExecutor extends BenchmarkBase {
 					writers,
 					channels,
 					flushTimeout,
-					false,
+					ChannelSelector.SelectorType.LOAD_BASED,
 					false,
 					-1,
 					-1,

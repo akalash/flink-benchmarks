@@ -68,7 +68,7 @@ public class SerializationFrameworkMiniBenchmarks extends BenchmarkBase {
 		executionConfig.registerPojoType(MyOperation.class);
 
 		env.addSource(new PojoSource(RECORDS_PER_INVOCATION, 10))
-				.rebalance()
+				.loadRebalance()
 				.addSink(new DiscardingSink<>());
 
 		env.execute();
@@ -84,7 +84,7 @@ public class SerializationFrameworkMiniBenchmarks extends BenchmarkBase {
 		executionConfig.registerPojoType(MyOperation.class);
 
 		env.addSource(new LongStringSource(RECORDS_PER_INVOCATION, 12))
-				.rebalance()
+				.loadRebalance()
 				.addSink(new DiscardingSink<>());
 
 		env.execute();
@@ -97,7 +97,7 @@ public class SerializationFrameworkMiniBenchmarks extends BenchmarkBase {
 		env.setParallelism(4);
 
 		env.addSource(new TupleSource(RECORDS_PER_INVOCATION, 10))
-				.rebalance()
+				.loadRebalance()
 				.addSink(new DiscardingSink<>());
 
 		env.execute();
@@ -114,7 +114,7 @@ public class SerializationFrameworkMiniBenchmarks extends BenchmarkBase {
 		executionConfig.registerKryoType(MyOperation.class);
 
 		env.addSource(new PojoSource(RECORDS_PER_INVOCATION, 10))
-				.rebalance()
+				.loadRebalance()
 				.addSink(new DiscardingSink<>());
 
 		env.execute();
@@ -127,7 +127,7 @@ public class SerializationFrameworkMiniBenchmarks extends BenchmarkBase {
 		env.setParallelism(4);
 
 		env.addSource(new AvroPojoSource(RECORDS_PER_INVOCATION, 10))
-				.rebalance()
+				.loadRebalance()
 				.addSink(new DiscardingSink<>());
 
 		env.execute();
@@ -140,7 +140,7 @@ public class SerializationFrameworkMiniBenchmarks extends BenchmarkBase {
 		env.setParallelism(4);
 
 		env.addSource(new RowSource(RECORDS_PER_INVOCATION, 10))
-				.rebalance()
+				.loadRebalance()
 				.addSink(new DiscardingSink<>());
 
 		env.execute();

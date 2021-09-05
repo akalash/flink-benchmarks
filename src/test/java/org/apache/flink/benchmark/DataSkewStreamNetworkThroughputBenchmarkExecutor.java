@@ -19,6 +19,7 @@
 package org.apache.flink.benchmark;
 
 import org.apache.flink.configuration.Configuration;
+import org.apache.flink.runtime.io.network.api.writer.ChannelSelector;
 import org.apache.flink.streaming.runtime.io.benchmark.DataSkewStreamNetworkThroughputBenchmark;
 
 import org.openjdk.jmh.annotations.Benchmark;
@@ -72,7 +73,7 @@ public class DataSkewStreamNetworkThroughputBenchmarkExecutor extends BenchmarkB
 
 		@Setup
 		public void setUp() throws Exception {
-			setUp(writers, channels, flushTimeout, false, false, -1, -1, new Configuration());
+			setUp(writers, channels, flushTimeout, ChannelSelector.SelectorType.LOAD_BASED, false, -1, -1, new Configuration());
 		}
 	}
 }

@@ -79,10 +79,10 @@ public class UnalignedCheckpointTimeBenchmark extends BenchmarkBase {
                         RecordSource.class.getName());
 
         source.slotSharingGroup("source")
-                .rebalance()
+                .loadRebalance()
                 .map((MapFunction<Record, Record>) value -> value)
                 .slotSharingGroup("map")
-                .rebalance()
+                .loadRebalance()
                 .addSink(new SlowDiscardSink<>())
                 .slotSharingGroup("sink");
 

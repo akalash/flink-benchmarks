@@ -68,7 +68,7 @@ public class SerializationFrameworkAllBenchmarks extends SerializationFrameworkM
 		env.setParallelism(4);
 
 		env.addSource(new PojoSource(RECORDS_PER_INVOCATION, 10))
-				.rebalance()
+				.loadRebalance()
 				.addSink(new DiscardingSink<>());
 
 		env.execute();
@@ -82,7 +82,7 @@ public class SerializationFrameworkAllBenchmarks extends SerializationFrameworkM
 		env.getConfig().enableForceKryo();
 
 		env.addSource(new PojoSource(RECORDS_PER_INVOCATION, 10))
-				.rebalance()
+				.loadRebalance()
 				.addSink(new DiscardingSink<>());
 
 		env.execute();
@@ -96,7 +96,7 @@ public class SerializationFrameworkAllBenchmarks extends SerializationFrameworkM
 		env.getConfig().enableForceAvro();
 
 		env.addSource(new PojoSource(RECORDS_PER_INVOCATION, 10))
-				.rebalance()
+				.loadRebalance()
 				.addSink(new DiscardingSink<>());
 
 		env.execute();
@@ -110,7 +110,7 @@ public class SerializationFrameworkAllBenchmarks extends SerializationFrameworkM
 
 		Schema schema = AvroGenericRecordSource.loadSchema();
 		env.addSource(new AvroGenericRecordSource(RECORDS_PER_INVOCATION, 10, schema))
-				.rebalance()
+				.loadRebalance()
 				.addSink(new DiscardingSink<>());
 
 		env.execute();
@@ -123,7 +123,7 @@ public class SerializationFrameworkAllBenchmarks extends SerializationFrameworkM
 		env.setParallelism(4);
 
 		env.addSource(new ScalaADTSource(RECORDS_PER_INVOCATION), ScalaADTSource.adtTypeInfo())
-				.rebalance()
+				.loadRebalance()
 				.addSink(new DiscardingSink<>());
 
 		env.execute();
@@ -141,7 +141,7 @@ public class SerializationFrameworkAllBenchmarks extends SerializationFrameworkM
 		executionConfig.addDefaultKryoSerializer(org.apache.flink.benchmark.thrift.MyOperation.class, TBaseSerializer.class);
 
 		env.addSource(new ThriftPojoSource(RECORDS_PER_INVOCATION, 10))
-				.rebalance()
+				.loadRebalance()
 				.addSink(new DiscardingSink<>());
 
 		env.execute();
@@ -158,7 +158,7 @@ public class SerializationFrameworkAllBenchmarks extends SerializationFrameworkM
 		executionConfig.registerTypeWithKryoSerializer(org.apache.flink.benchmark.protobuf.MyPojoOuterClass.MyOperation.class, ProtobufSerializer.class);
 
 		env.addSource(new ProtobufPojoSource(RECORDS_PER_INVOCATION, 10))
-				.rebalance()
+				.loadRebalance()
 				.addSink(new DiscardingSink<>());
 
 		env.execute();
