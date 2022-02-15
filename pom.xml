@@ -328,7 +328,11 @@ under the License.
 							<classpathScope>test</classpathScope>
 							<executable>${executableJava}</executable>
 							<arguments>
-								<argument>-XX:+UseParallelGC</argument>
+								<argument>-XX:-CompactStrings</argument>
+								<argument>-XX:-UseBiasedLocking</argument>
+								<argument>-XX:-UseCountedLoopSafepoints</argument>
+								<argument>-XX:FreqInlineSize=500</argument>
+								<argument>-XX:InlineSmallCode=3000</argument>
 								<argument>-classpath</argument>
 								<classpath/>
 								<argument>org.openjdk.jmh.Main</argument>
