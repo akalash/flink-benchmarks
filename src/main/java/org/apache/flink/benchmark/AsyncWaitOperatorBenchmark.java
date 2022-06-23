@@ -18,6 +18,7 @@
 package org.apache.flink.benchmark;
 
 import org.apache.flink.benchmark.functions.LongSource;
+import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.datastream.AsyncDataStream;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
@@ -37,10 +38,13 @@ import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 import org.openjdk.jmh.runner.options.VerboseMode;
 
+import java.time.Duration;
 import java.util.Collections;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+
+import static org.apache.flink.configuration.ResourceManagerOptions.REQUIREMENTS_CHECK_DELAY;
 
 @OperationsPerInvocation(value = AsyncWaitOperatorBenchmark.RECORDS_PER_INVOCATION)
 public class AsyncWaitOperatorBenchmark extends BenchmarkBase {
@@ -73,7 +77,7 @@ public class AsyncWaitOperatorBenchmark extends BenchmarkBase {
     }
 
     @Benchmark
-    public void asyncWait(FlinkEnvironmentContext context) throws Exception {
+    public void asyncWait(AsyncWaitEnvironmentContext context) throws Exception {
 
         StreamExecutionEnvironment env = context.env;
         env.enableCheckpointing(CHECKPOINT_INTERVAL_MS);
@@ -96,6 +100,17 @@ public class AsyncWaitOperatorBenchmark extends BenchmarkBase {
                         source, new BenchmarkAsyncFunctionExecutor(), 0, TimeUnit.MILLISECONDS);
             default:
                 throw new UnsupportedOperationException("Unknown mode");
+        }
+    }
+
+    public static class AsyncWaitEnvironmentContext extends FlinkEnvironmentContext {
+        @Override
+        protected Configuration createConfiguration() {
+            Configuration conf = super.createConfiguration();
+
+            conf.set(REQUIREMENTS_CHECK_DELAY, Duration.ZERO);
+
+            return conf;
         }
     }
 
