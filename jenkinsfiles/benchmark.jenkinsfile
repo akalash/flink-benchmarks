@@ -64,17 +64,18 @@ timestamps {
                                     string(
                                         defaultValue: 'org.apache.flink.benchmark.*',
                                         name: 'jmh_benchmarks',
-                                        description: """-Dbenchmarks parameter for jmh. For example:
-                                                      | org.apache.flink.benchmark.*
-                                                      | org.apache.flink.benchmark.SortingBoundedInputBenchmarks
-                                                      | org.apache.flink.state.benchmarks.*""",
+                                        description: """\
+                                        -Dbenchmarks parameter for jmh. For example:
+                                         org.apache.flink.benchmark.*
+                                         org.apache.flink.benchmark.SortingBoundedInputBenchmarks
+                                         org.apache.flink.state.benchmarks.*""".stripIndent(),
                                         trim: true
                                     ),
                                     string(
                                         defaultValue: 'org.apache.flink.benchmark.full.*,org.apache.flink.state.benchmark.*,org.apache.flink.scheduler.benchmark.*',
                                         name: 'jmh_benchmarks_excludes',
                                         description: """-DbenchmarkExcludes parameter for jmh.
-                                                      It can not be empty use '-' instead.""",
+                                                      It can not be empty use '-' instead.""".stripIndent(),
                                         trim: true
                                     ),
                                     choice(
